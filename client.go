@@ -29,7 +29,8 @@ func parseASNs(asnList string) ([]ASN, error) {
 	for i, tok := range tokens {
 		asn, err := ParseASN(tok)
 		if err != nil {
-			return nil, errors.Wrap(err, "failed to parse asn")
+		    asns[i] = ASN(0)
+			continue
 		}
 		asns[i] = ASN(asn)
 	}

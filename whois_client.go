@@ -135,8 +135,12 @@ func (c *WhoisClient) LookupIPs(ips []net.IP) (resp []Response, err error) {
 		re.IP = net.ParseIP(string(tokens[1]))
 
 		//Read range
-		if _, re.Range, err = net.ParseCIDR(string(tokens[2])); err != nil {
-			return
+		if string(tokens[2]) != "NA" {
+			if _, re.Range, err = net.ParseCIDR(string(tokens[2])); err != nil {
+				return
+			}
+		} else {
+			re.Range = nil
 		}
 
 		//Read country
